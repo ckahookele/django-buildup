@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>Create a Fact</title>
+  </head>
+  <body>
+    <h1>New Fact</h1>
+    <form action="{% url 'new_fact' %}" method="POST">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit"/>
+    </form>
+  </body>
+</html>

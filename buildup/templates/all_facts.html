@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Random Facts</title>
+  </head>
+  <body>
+    <h1>Random Facts</h1>
+    {% for fact in facts %}
+    <div>
+      <h3>{{ fact.text }}</h3>
+      - {{ fact.author }}, {{ fact.created_date }}
+    </div>
+    {% endfor %}
+  </body>
+</html>
