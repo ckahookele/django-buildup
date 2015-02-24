@@ -8,6 +8,10 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 import subprocess
 
+class FactForm(forms.Form):
+        text = forms.CharField(label="Fact", max_length=255)
+        author = forms.CharField(label="Name", max_length=255)
+
 def hello(request):
     return HttpResponse("Hello there!")
 def time(request):
@@ -48,4 +52,5 @@ def new_fact(request):
         else:
             # return the form and display the errors
             return render(request, "new_fact.html", { "form": form })
+       
         return HttpResponse("TODO: save the fact")
