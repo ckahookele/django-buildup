@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from datetime import datetime
 from random import randint
@@ -10,7 +11,7 @@ import subprocess
 
 class FactForm(forms.Form):
         text = forms.CharField(label="Fact", max_length=255)
-        author = forms.CharField(label="Name", max_length=255)
+        author = request.user
 
 def hello(request):
     return HttpResponse("Hello there!")
@@ -35,6 +36,7 @@ def speak_template(request, sentence):
 def all_facts(request):
     return render(request, "all_facts.html", { "facts": Fact.objects.all() })
 
+@login_required
 def new_fact(request):
     # someone wants to create a fact
     if request.method == "GET":
