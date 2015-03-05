@@ -43,15 +43,15 @@ def new_fact(request):
         form = FactForm()
         return render(request, "new_fact.html", { "form": form })
     else:
-                # someone submitted the form so we need to save the data
+        # someone submitted the form so we need to save the data
         form = FactForm(request.POST)
-
-        if form.is_valid():
-            # TODO actually actually save the new fact
-            user = request.user()
-            # and redirect to the all_facts page
-            return HttpResponseRedirect(reverse('all_facts'))
-        else:
-            # return the form and display the errors
-            return render(request, "new_fact.html", { "form": form })
-            return HttpResponse(form.cleaned_data['text'], form.cleaned_data['author'])
+    if form.is_valid():
+        # TODO actually actually save the new fact
+        fact = Fact(text =form.cleaned_data['text'], author = request.user, created_date = datetime.now())
+        fact.save()
+        # and redirect to the all_facts page
+        return HttpResponseRedirect(reverse('all_facts'))
+    else:
+        # return the form and display the errors
+        return render(request, "new_fact.html", { "form": form })
+        return HttpResponse(form.cleaned_data['text'], form.cleaned_data['author'])

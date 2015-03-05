@@ -1,13 +1,12 @@
-<html>
-  <head>
-    <title>Create a Fact</title>
-  </head>
-  <body>
-    <h1>New Fact</h1>
-    <form action="{% url 'new_fact' %}" method="POST">
-      {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="Submit"/>
-    </form>
-  </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Create a Fact{% endblock %}
+
+{% block content %}
+  <h1>New Fact</h1>
+  <form action="{% url 'new_fact' %}" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit"/>
+  </form>
+{% endblock %}
