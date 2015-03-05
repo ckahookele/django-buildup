@@ -7,11 +7,11 @@ from buildup.models import Fact
 from django import forms
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 import subprocess
 
 class FactForm(forms.Form):
         text = forms.CharField(label="Fact", max_length=255)
-        author = request.user
 
 def hello(request):
     return HttpResponse("Hello there!")
@@ -48,11 +48,10 @@ def new_fact(request):
 
         if form.is_valid():
             # TODO actually actually save the new fact
-
+            user = request.user()
             # and redirect to the all_facts page
             return HttpResponseRedirect(reverse('all_facts'))
         else:
             # return the form and display the errors
             return render(request, "new_fact.html", { "form": form })
-       
-        return HttpResponse("TODO: save the fact")
+            return HttpResponse(form.cleaned_data['text'], form.cleaned_data['author'])
